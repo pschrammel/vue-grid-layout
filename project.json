@@ -1,0 +1,9 @@
+{
+  "project": "vue-grid-layout",
+    
+  "path": "vue-grid-layout",
+  "docker": {
+    "repo": "xxx",
+    "name": "vue-grid-layout"
+  }
+}
