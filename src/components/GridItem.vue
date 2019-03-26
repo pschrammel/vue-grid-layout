@@ -550,6 +550,8 @@
                     case "dragmove": {
                         const coreEvent = createCoreData(this.lastX, this.lastY, x, y);
 //                        Add rtl support
+var calced = this.calcXY(coreEvent.y,coreEvent.x)
+                        console.log("GUESS", coreEvent.x,coreEvent.y, calced) 
                         if (this.renderRtl) {
                             newPosition.left = this.dragging.left - coreEvent.deltaX;
                         } else {

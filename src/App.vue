@@ -49,7 +49,7 @@
                     @layout-ready="layoutReadyEvent"
                     @layout-updated="layoutUpdatedEvent"
             >
-                <grid-item v-for="item in layout" :key="item.i"
+                <grid-item v-for="item in layout" :key="item.i" 
                            :static="item.static"
                            :x="item.x"
                            :y="item.y"
@@ -61,6 +61,40 @@
                            @resized="resized"
                            @moved="moved"
                 >
+                         <div v-if="item.subLayout" >
+                             <grid-layout
+                                :layout="item.subLayout"
+                                :col-num="1"
+                                :row-height="rowHeight"
+                                :is-draggable="true"
+                                :is-resizable="true"
+                                :vertical-compact="true"
+                                :use-css-transforms="true"
+                                :responsive="responsive"
+                                :margins="item.subLayout.margins"
+                                @layout-created="layoutCreatedEvent"
+                                @layout-before-mount="layoutBeforeMountEvent"
+                                @layout-mounted="layoutMountedEvent"
+                                @layout-ready="layoutReadyEvent"
+                                @layout-updated="layoutUpdatedEvent"
+                            > 
+                                 <grid-item v-for="item2 in item.subLayout" :key="item2.i"
+                                    :x="item2.x"
+                                    :y="item2.y"
+                                    :w="item2.w"
+                                    :h="item2.h"
+                                    
+                                    :i="item2.i"
+                                    @resize="resize"
+                                    @move="move"
+                                    @resized="resized"
+                                    @moved="moved"
+                                >
+                                <test-element :text="item2.i"></test-element>
+                                 </grid-item>
+                             </grid-layout>                 
+                        </div>
+            
                     <!--<custom-drag-element :text="item.i"></custom-drag-element>-->
                     <test-element :text="item.i"></test-element>
                     <!--<button @click="clicked">CLICK ME!</button>-->
@@ -85,9 +119,9 @@
                            :min-h="2"
                            :i="item.i"
                            :is-draggable="item.draggable"
-                           :is-resizable="item.resizable"
+                           :is-resizable="item.resizable" 
                 >
-                    <test-element :text="item.i"></test-element>
+                <test-element :text="item.i"></test-element>
                 </grid-item>
             </grid-layout>-->
         </div>
@@ -116,14 +150,19 @@
         {"x":6,"y":3,"w":2,"h":4,"i":"9", resizable: false, draggable: false, static: true},
         {"x":8,"y":4,"w":2,"h":4,"i":"10", resizable: false, draggable: false, static: false},
         {"x":10,"y":4,"w":2,"h":4,"i":"11", resizable: false, draggable: false, static: false},
-        {"x":0,"y":10,"w":2,"h":5,"i":"12", resizable: false, draggable: false, static: false},
+        {"x":0,"y":9,"w":2,"h":5,"i":"12", resizable: false, draggable: false, static: false},
         {"x":2,"y":10,"w":2,"h":5,"i":"13", resizable: false, draggable: false, static: false},
         {"x":4,"y":8,"w":2,"h":4,"i":"14", resizable: false, draggable: false, static: false},
         {"x":6,"y":8,"w":2,"h":4,"i":"15", resizable: false, draggable: false, static: false},
         {"x":8,"y":10,"w":2,"h":5,"i":"16", resizable: false, draggable: false, static: false},
         {"x":10,"y":4,"w":2,"h":2,"i":"17", resizable: false, draggable: false, static: false},
         {"x":0,"y":9,"w":2,"h":3,"i":"18", resizable: false, draggable: false, static: false},
-        {"x":2,"y":6,"w":2,"h":2,"i":"19", resizable: false, draggable: false, static: false}
+        {"x":2,"y":13,"w":3,"h":3,"i":"19", resizable: false, draggable: false, static: false,
+          subLayout: [
+                {"x":0,"y":0,"w":4,"h":4,"i":"20", resizable: true, draggable:true, static: false},
+                {"x":0,"y":3,"w":4,"h":4,"i":"21", resizable: true, draggable:true, static: false},
+          ],
+        },
     ];
 
     export default {
@@ -135,8 +174,8 @@
             TestElement,
             CustomDragElement,
         },
-        data () {
-            return {
+    data () {
+         return {
                 layout: JSON.parse(JSON.stringify(testLayout)),
                 layout2: JSON.parse(JSON.stringify(testLayout)),
                 draggable: true,
@@ -146,8 +185,10 @@
                 rowHeight: 30,
                 colNum: 12,
                 index: 0
-            }
-        },
+        }
+        
+    },
+    
         mounted: function () {
             this.index = this.layout.length;
         },
