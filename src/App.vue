@@ -8,6 +8,9 @@
                 <div class="columns">
                     <div class="layoutItem" v-for="item in layout" :key="item.i">
                         <b>{{item.i}}</b>: [{{item.x}}, {{item.y}}, {{item.w}}, {{item.h}}]
+                        <div class="layoutItem" v-for="item2 in item.subLayout" :key="item2.i">
+                            <b>{{item2.i}}</b>: [{{item2.x}}, {{item2.y}}, {{item2.w}}, {{item2.h}}]
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,8 +63,8 @@
                            @move="move"
                            @resized="resized"
                            @moved="moved"
-                >
-                         <div v-if="item.subLayout" >
+                >       
+                         <div v-if="item.subLayout">
                              <grid-layout
                                 :layout="item.subLayout"
                                 :col-num="1"
@@ -72,26 +75,25 @@
                                 :use-css-transforms="true"
                                 :responsive="responsive"
                                 :margins="item.subLayout.margins"
-                                @layout-created="layoutCreatedEvent"
-                                @layout-before-mount="layoutBeforeMountEvent"
-                                @layout-mounted="layoutMountedEvent"
-                                @layout-ready="layoutReadyEvent"
-                                @layout-updated="layoutUpdatedEvent"
-                            > 
+                                                                   
+                            >    
+                            
                                  <grid-item v-for="item2 in item.subLayout" :key="item2.i"
+                                    :static="item2.static"
                                     :x="item2.x"
                                     :y="item2.y"
                                     :w="item2.w"
                                     :h="item2.h"
-                                    
                                     :i="item2.i"
                                     @resize="resize"
                                     @move="move"
                                     @resized="resized"
                                     @moved="moved"
                                 >
+                                <!--<custom-drag-element :text="item2.i"></custom-drag-element>-->
                                 <test-element :text="item2.i"></test-element>
                                  </grid-item>
+
                              </grid-layout>                 
                         </div>
             
@@ -157,14 +159,16 @@
         {"x":8,"y":10,"w":2,"h":5,"i":"16", resizable: false, draggable: false, static: false},
         {"x":10,"y":4,"w":2,"h":2,"i":"17", resizable: false, draggable: false, static: false},
         {"x":0,"y":9,"w":2,"h":3,"i":"18", resizable: false, draggable: false, static: false},
-        {"x":2,"y":13,"w":3,"h":3,"i":"19", resizable: false, draggable: false, static: false,
-          subLayout: [
-                {"x":0,"y":0,"w":4,"h":4,"i":"20", resizable: true, draggable:true, static: false},
-                {"x":0,"y":3,"w":4,"h":4,"i":"21", resizable: true, draggable:true, static: false},
-          ],
-        },
-    ];
-
+        {"x":2,"y":13,"w":3,"h":3,"i":"19", resizable: false, draggable: false, static: false, 
+        subLayout: [
+                {"x":0,"y":0,"w":4,"h":4,"i":"20"},
+                {"x":0,"y":3,"w":4,"h":4,"i":"21"},
+            ],
+          },
+        ]
+    
+    //testLayout.testLayout[testLayout.length - 1].sublLayout.subLayout[0]= testLayout;
+    //testLayout.testLayout[testLayout.length - 1].sublLayout.subLayout[1]= testLayout;
     export default {
         name: 'app',
         components: {

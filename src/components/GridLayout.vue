@@ -281,7 +281,7 @@
                 //l.x = x;
                 //l.y = y;
                 // Move the element to the dragged location.
-                this.layout = moveElement(this.layout, l, x, y, true);
+                 this.layout = moveElement(this.layout, l, x, y, true);
                 compact(this.layout, this.verticalCompact);
                 // needed because vue can't detect changes on array element properties
                 this.eventBus.$emit("compact");

@@ -558,9 +558,9 @@ var calced = this.calcXY(coreEvent.y,coreEvent.x)
                             newPosition.left = this.dragging.left + coreEvent.deltaX;
                         }
                         newPosition.top = this.dragging.top + coreEvent.deltaY;
-//                        console.log("### drag => " + event.type + ", x=" + x + ", y=" + y);
-//                        console.log("### drag => " + event.type + ", deltaX=" + coreEvent.deltaX + ", deltaY=" + coreEvent.deltaY);
-//                        console.log("### drag end => " + JSON.stringify(newPosition));
+                        console.log("### drag => " + event.type + ", x=" + x + ", y=" + y);
+                        console.log("### drag => " + event.type + ", deltaX=" + coreEvent.deltaX + ", deltaY=" + coreEvent.deltaY);
+                        console.log("### drag end => " + JSON.stringify(newPosition));
                         this.dragging = newPosition;
                         break;
                     }

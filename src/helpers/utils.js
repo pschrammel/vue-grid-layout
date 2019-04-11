@@ -66,6 +66,8 @@ export function collides(l1: LayoutItem, l2: LayoutItem): boolean {
   if (l1.y + l1.h <= l2.y) return false; // l1 is above l2
   if (l1.y >= l2.y + l2.h) return false; // l1 is below l2
   if (l1.h > l2.h && l1.y >= l2.y && l1.x >= l2.x) return false;
+  //if (l1.x !== l2.x && l1.y !== l2.y) return false;
+  //if(l1.layout.l1)
   return true; // boxes overlap
 }
 
@@ -213,8 +215,9 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
   // Short-circuit if nothing to do.
   if (l.y === y && l.x === x) return layout;
 
-  const movingUp = y && l.y > y;
+  const movingUp = y;
   // This is quite a bit faster than extending the object
+
   if (typeof x === 'number') l.x = x;
   if (typeof y === 'number') l.y = y;
   l.moved = true;
