@@ -45,7 +45,7 @@
             },
             colNum: {
                 type: Number,
-                default: 12
+                default: 1
             },
             rowHeight: {
                 type: Number,

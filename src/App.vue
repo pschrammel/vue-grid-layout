@@ -7,7 +7,7 @@
                 Displayed as <code>[x, y, w, h]</code>:
                 <div class="columns">
                     <div class="layoutItem" v-for="item in layout" :key="item.i">
-                        <b>{{item.i}}</b>: [{{item.x}}, {{item.y}}, {{item.w}}, {{item.h}}]
+                        <b>{{item.i}}</b>: [{{item.x}},{{item.y}}, {{item.w}}, {{item.h}}]
                         <div class="layoutItem" v-for="item2 in item.subLayout" :key="item2.i">
                             <b>{{item2.i}}</b>: [{{item2.x}}, {{item2.y}}, {{item2.w}}, {{item2.h}}]
                         </div>
@@ -18,7 +18,7 @@
                 Displayed as <code>[x, y, w, h]</code>:
                 <div class="columns">
                     <div class="layoutItem" v-for="item in layout2">
-                        <b>{{item.i}}</b>: [{{item.x}}, {{item.y}}, {{item.w}}, {{item.h}}]
+                        <b>{{item.i}}</b>: [{{item.x}},{{item.y}}, {{item.w}}, {{item.h}}]
                     </div>
                 </div>
             </div>-->
@@ -54,6 +54,7 @@
             >
                 <grid-item v-for="item in layout" :key="item.i" 
                            :static="item.static"
+                           
                            :x="item.x"
                            :y="item.y"
                            :w="item.w"
@@ -80,7 +81,8 @@
                             
                                  <grid-item v-for="item2 in item.subLayout" :key="item2.i"
                                     :static="item2.static"
-                                    :x="item2.x"
+
+                                    :x="item2.x"             
                                     :y="item2.y"
                                     :w="item2.w"
                                     :h="item2.h"
@@ -105,7 +107,7 @@
             <hr/>
             <!--<grid-layout
                     :layout="layout2"
-                    :col-num="12"
+                    :col-num="1"
                     :row-height="rowHeight"
                     :is-draggable="draggable"
                     :is-resizable="resizable"
@@ -113,6 +115,7 @@
                     :use-css-transforms="true"
             >
                 <grid-item v-for="item in layout2" :key="item.i"
+                           
                            :x="item.x"
                            :y="item.y"
                            :w="item.w"
@@ -140,35 +143,18 @@
     //var eventBus = require('./eventBus');
 
     let testLayout = [
-        {"x":0,"y":0,"w":2,"h":6,"i":"0", resizable: true, draggable: true, static: false},
-        {"x":2,"y":0,"w":2,"h":4,"i":"1", resizable: null, draggable: null, static: true},
-        {"x":4,"y":0,"w":2,"h":5,"i":"2", resizable: false, draggable: false, static: false},
-        {"x":6,"y":0,"w":2,"h":3,"i":"3", resizable: false, draggable: false, static: false},
-        {"x":8,"y":0,"w":2,"h":3,"i":"4", resizable: false, draggable: false, static: false},
-        {"x":10,"y":0,"w":2,"h":3,"i":"5", resizable: false, draggable: false, static: false},
-        {"x":0,"y":5,"w":2,"h":5,"i":"6", resizable: false, draggable: false, static: false},
-        {"x":2,"y":5,"w":2,"h":5,"i":"7", resizable: false, draggable: false, static: false},
-        {"x":4,"y":5,"w":2,"h":5,"i":"8", resizable: false, draggable: false, static: false},
-        {"x":6,"y":3,"w":2,"h":4,"i":"9", resizable: false, draggable: false, static: true},
-        {"x":8,"y":4,"w":2,"h":4,"i":"10", resizable: false, draggable: false, static: false},
-        {"x":10,"y":4,"w":2,"h":4,"i":"11", resizable: false, draggable: false, static: false},
-        {"x":0,"y":9,"w":2,"h":5,"i":"12", resizable: false, draggable: false, static: false},
-        {"x":2,"y":10,"w":2,"h":5,"i":"13", resizable: false, draggable: false, static: false},
-        {"x":4,"y":8,"w":2,"h":4,"i":"14", resizable: false, draggable: false, static: false},
-        {"x":6,"y":8,"w":2,"h":4,"i":"15", resizable: false, draggable: false, static: false},
-        {"x":8,"y":10,"w":2,"h":5,"i":"16", resizable: false, draggable: false, static: false},
-        {"x":10,"y":4,"w":2,"h":2,"i":"17", resizable: false, draggable: false, static: false},
-        {"x":0,"y":9,"w":2,"h":3,"i":"18", resizable: false, draggable: false, static: false},
-        {"x":2,"y":13,"w":3,"h":3,"i":"19", resizable: false, draggable: false, static: false, 
+        {"x":0,"y":0,"w":8,"h":4,"i":"0", resizable: true, draggable: true, static: false},
+        {"x":0,"y":5,"w":8,"h":4,"i":"1", resizable: null, draggable: null, static: false},
+        {"x":0,"y":10,"w":8,"h":4,"i":"2", resizable: false, draggable: false, static: false},
+        {"x":0,"y":15,"w":8,"h":4,"i":"3", resizable: false, draggable: false, static: false},
+        {"x":0,"y":20,"w":8,"h":4,"i":"4", resizable: false, draggable: false, static: false,
         subLayout: [
-                {"x":0,"y":0,"w":4,"h":4,"i":"20"},
-                {"x":0,"y":3,"w":4,"h":4,"i":"21"},
+                {"x":0,"y":0,"w":8,"h":4,"i":"5"},
+                {"x":0,"y":4,"w":8,"h":4,"i":"6"},
             ],
           },
         ]
     
-    //testLayout.testLayout[testLayout.length - 1].sublLayout.subLayout[0]= testLayout;
-    //testLayout.testLayout[testLayout.length - 1].sublLayout.subLayout[1]= testLayout;
     export default {
         name: 'app',
         components: {
@@ -178,8 +164,8 @@
             TestElement,
             CustomDragElement,
         },
-    data () {
-         return {
+        data () {
+            return {
                 layout: JSON.parse(JSON.stringify(testLayout)),
                 layout2: JSON.parse(JSON.stringify(testLayout)),
                 draggable: true,
@@ -187,12 +173,10 @@
                 mirrored: false,
                 responsive: true,
                 rowHeight: 30,
-                colNum: 12,
+                colNum: 1,
                 index: 0
-        }
-        
-    },
-    
+            }
+        },
         mounted: function () {
             this.index = this.layout.length;
         },
@@ -247,7 +231,6 @@
                 setDocumentDir(toggle);
                 //eventBus.$emit('directionchange');
             },
-
             layoutCreatedEvent: function(newLayout){
                 console.log("Created layout: ", newLayout)
             },
@@ -263,7 +246,6 @@
             layoutUpdatedEvent: function(newLayout){
                 console.log("Updated layout: ", newLayout)
             },
-
         },
     }
 </script>
@@ -277,21 +259,17 @@
             color: #2c3e50;
             margin-top: 60px;
         }
-
         h1, h2 {
             font-weight: normal;
         }
-
         ul {
             list-style-type: none;
             padding: 0;
         }
-
         li {
             display: inline-block;
             margin: 0 10px;
         }
-
         a {
             color: #42b983;
         }*/

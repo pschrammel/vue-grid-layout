@@ -65,9 +65,8 @@ export function collides(l1: LayoutItem, l2: LayoutItem): boolean {
   if (l1.x >= l2.x + l2.w) return false; // l1 is right of l2
   if (l1.y + l1.h <= l2.y) return false; // l1 is above l2
   if (l1.y >= l2.y + l2.h) return false; // l1 is below l2
+  //if (l1.x !== 0 || l2.x !== 0) return true;
   if (l1.h > l2.h && l1.y >= l2.y && l1.x >= l2.x) return false;
-  //if (l1.x !== l2.x && l1.y !== l2.y) return false;
-  //if(l1.layout.l1)
   return true; // boxes overlap
 }
 
@@ -213,12 +212,11 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
   if (l.static) return layout;
 
   // Short-circuit if nothing to do.
-  if (l.y === y && l.x === x) return layout;
+  //if (l.y === y && l.x === x) return layout;
 
-  const movingUp = y;
+  const movingUp = y && l.y > y;
   // This is quite a bit faster than extending the object
-
-  if (typeof x === 'number') l.x = x;
+  if (typeof x === 'number') l.x = 0;
   if (typeof y === 'number') l.y = y;
   l.moved = true;
 
@@ -397,20 +395,17 @@ export function synchronizeLayoutWithChildren(initialLayout: Layout, children: A
     children = [children];
   }
   initialLayout = initialLayout || [];
-
   // Generate one layout item per child.
   let layout: Layout = [];
   for (let i = 0, len = children.length; i < len; i++) {
     let newItem;
     const child = children[i];
-
     // Don't overwrite if it already exists.
     const exists = getLayoutItem(initialLayout, child.key || "1" /!* FIXME satisfies Flow *!/);
     if (exists) {
       newItem = exists;
     } else {
       const g = child.props._grid;
-
       // Hey, this item has a _grid property, use it.
       if (g) {
         if (!isProduction) {
@@ -431,11 +426,9 @@ export function synchronizeLayoutWithChildren(initialLayout: Layout, children: A
     }
     layout[i] = newItem;
   }
-
   // Correct the layout.
   layout = correctBounds(layout, {cols: cols});
   layout = compact(layout, verticalCompact);
-
   return layout;
 }
 */
