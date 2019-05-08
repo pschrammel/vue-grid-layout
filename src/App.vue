@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <h1 style="text-align: center">Vue Grid Layout</h1>
+        <h1 style="text-align: center">Vue Vertical Layout</h1>
         <!--<pre>{{ layout | json }}</pre>-->
         <div>
             <div class="layoutJSON">
@@ -36,7 +36,7 @@
             <div style="margin-top: 10px;margin-bottom: 10px;">
                 Row Height: <input type="number" v-model="rowHeight"/> Col nums: <input type="number" v-model="colNum"/>
             </div>
-            <grid-layout
+            <vertical-layout
                     :layout.sync="layout"
                     :col-num="parseInt(colNum)"
                     :row-height="rowHeight"
@@ -52,7 +52,7 @@
                     @layout-ready="layoutReadyEvent"
                     @layout-updated="layoutUpdatedEvent"
             >
-                <grid-item v-for="item in layout" :key="item.i" 
+                <vertical-item v-for="item in layout" :key="item.i" 
                            :static="item.static"
                            
                            :x="item.x"
@@ -66,7 +66,7 @@
                            @moved="moved"
                 >       
                          <div v-if="item.subLayout">
-                             <grid-layout
+                             <vertical-layout
                                 :layout="item.subLayout"
                                 :col-num="1"
                                 :row-height="rowHeight"
@@ -79,7 +79,7 @@
                                                                    
                             >    
                             
-                                 <grid-item v-for="item2 in item.subLayout" :key="item2.i"
+                                 <vertical-item v-for="item2 in item.subLayout" :key="item2.i"
                                     :static="item2.static"
 
                                     :x="item2.x"             
@@ -94,18 +94,18 @@
                                 >
                                 <!--<custom-drag-element :text="item2.i"></custom-drag-element>-->
                                 <test-element :text="item2.i"></test-element>
-                                 </grid-item>
+                                 </vertical-item>
 
-                             </grid-layout>                 
+                             </vertical-layout>                 
                         </div>
             
                     <!--<custom-drag-element :text="item.i"></custom-drag-element>-->
                     <test-element :text="item.i"></test-element>
                     <!--<button @click="clicked">CLICK ME!</button>-->
-                </grid-item>
-            </grid-layout>
+                </vertical-item>
+            </vertical-layout>
             <hr/>
-            <!--<grid-layout
+            <!--<vertical-layout
                     :layout="layout2"
                     :col-num="1"
                     :row-height="rowHeight"
@@ -114,7 +114,7 @@
                     :vertical-compact="true"
                     :use-css-transforms="true"
             >
-                <grid-item v-for="item in layout2" :key="item.i"
+                <vertical-item v-for="item in layout2" :key="item.i"
                            
                            :x="item.x"
                            :y="item.y"
@@ -127,15 +127,15 @@
                            :is-resizable="item.resizable" 
                 >
                 <test-element :text="item.i"></test-element>
-                </grid-item>
-            </grid-layout>-->
+                </vertical-item>
+            </vertical-layout>-->
         </div>
     </div>
 </template>
 
 <script>
-    import GridItem from './components/GridItem.vue';
-    import GridLayout from './components/GridLayout.vue';
+    import VerticalItem from './components/VerticalItem.vue';
+    import VerticalLayout from './components/VerticalLayout.vue';
     // import ResponsiveGridLayout from './components/ResponsiveGridLayout.vue';
     import TestElement from './components/TestElement.vue';
     import CustomDragElement from './components/CustomDragElement.vue';
@@ -159,8 +159,8 @@
         name: 'app',
         components: {
             // ResponsiveGridLayout,
-            GridLayout,
-            GridItem,
+            VerticalLayout,
+            VerticalItem,
             TestElement,
             CustomDragElement,
         },

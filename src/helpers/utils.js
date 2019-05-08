@@ -216,7 +216,7 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
 
   const movingUp = y && l.y > y;
   // This is quite a bit faster than extending the object
-  if (typeof x === 'number') l.x = 0;
+  if (typeof x === 'number') l.x = l.x;
   if (typeof y === 'number') l.y = y;
   l.moved = true;
 
