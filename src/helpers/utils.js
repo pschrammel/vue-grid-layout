@@ -184,6 +184,7 @@ export function getFirstCollision(layout: Layout, layoutItem: LayoutItem): ?Layo
   }
 }
 
+
 export function getAllCollisions(layout: Layout, layoutItem: LayoutItem): Array<LayoutItem> {
   return layout.filter((l) => collides(l, layoutItem));
 }
