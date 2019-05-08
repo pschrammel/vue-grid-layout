@@ -66,7 +66,7 @@ export function collides(l1: LayoutItem, l2: LayoutItem): boolean {
   if (l1.y + l1.h <= l2.y) return false; // l1 is above l2
   if (l1.y >= l2.y + l2.h) return false; // l1 is below l2
   //if (l1.x !== 0 || l2.x !== 0) return true;
-  if (l1.h > l2.h && l1.y >= l2.y && l1.x >= l2.x) return false;
+  //if (l1.h > l2.h && l1.y >= l2.y && l1.x >= l2.x) return false;
   return true; // boxes overlap
 }
 
@@ -115,15 +115,15 @@ export function compact(layout: Layout, verticalCompact: Boolean): Layout {
 export function compactItem(compareWith: Layout, l: LayoutItem, verticalCompact: boolean): LayoutItem {
   if (verticalCompact) {
     // Move the element up as far as it can go without colliding.
-    while (l.y > 0 && !getFirstCollision(compareWith, l)) {
-      l.y--;
+    while (l.x > 0 && !getFirstCollision(compareWith, l)) {
+      l.x--;
     }
   }
 
   // Move it down, and keep moving it down if it's colliding.
   let collides;
   while((collides = getFirstCollision(compareWith, l))) {
-    l.y = collides.y + collides.h;
+    l.x = collides.x + collides.w;
   }
   return l;
 }
@@ -139,10 +139,10 @@ export function correctBounds(layout: Layout, bounds: {cols: number}): Layout {
   for (let i = 0, len = layout.length; i < len; i++) {
     const l = layout[i];
     // Overflows right
-    if (l.x + l.w > bounds.cols) l.x = bounds.cols - l.w;
+    if (l.y + l.h > bounds.cols) l.y = bounds.cols - l.h;
     // Overflows left
-    if (l.x < 0) {
-      l.x = 0;
+    if (l.y < 0) {
+      l.y = 0;
       l.w = bounds.cols;
     }
     if (!l.static) collidesWith.push(l);
@@ -150,7 +150,7 @@ export function correctBounds(layout: Layout, bounds: {cols: number}): Layout {
       // If this is static and collides with other statics, we must move it down.
       // We have to do something nicer than just letting them overlap.
       while(getFirstCollision(collidesWith, l)) {
-        l.y++;
+        l.x++;
       }
     }
   }
@@ -216,8 +216,8 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
 
   const movingUp = y && l.y > y;
   // This is quite a bit faster than extending the object
-  if (typeof x === 'number') l.x = 0;
-  if (typeof y === 'number') l.y = y;
+  if (typeof x === 'number') l.x = x;
+  if (typeof y === 'number') l.y = l.y;
   l.moved = true;
 
   // If this collides with anything, move it.

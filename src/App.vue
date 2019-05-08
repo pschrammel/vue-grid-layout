@@ -143,16 +143,17 @@
     //var eventBus = require('./eventBus');
 
     let testLayout = [
-        {"x":0,"y":0,"w":8,"h":4,"i":"0", resizable: true, draggable: true, static: false},
-        {"x":0,"y":5,"w":8,"h":4,"i":"1", resizable: null, draggable: null, static: false},
-        {"x":0,"y":10,"w":8,"h":4,"i":"2", resizable: false, draggable: false, static: false},
-        {"x":0,"y":15,"w":8,"h":4,"i":"3", resizable: false, draggable: false, static: false},
-        {"x":0,"y":20,"w":8,"h":4,"i":"4", resizable: false, draggable: false, static: false,
+        {"x":0,"y":0,"w":2,"h":6,"i":"0", resizable: true, draggable: true, static: false},
+        {"x":2,"y":0,"w":2,"h":6,"i":"1", resizable: null, draggable: null, static: false},
+        {"x":4,"y":0,"w":2,"h":6,"i":"2", resizable: false, draggable: false, static: false},
+        {"x":6,"y":0,"w":2,"h":6,"i":"3", resizable: false, draggable: false, static: false},
+        {"x":8,"y":0,"w":4,"h":6,"i":"4", resizable: false, draggable: false, static: false,
         subLayout: [
-                {"x":0,"y":0,"w":8,"h":4,"i":"5"},
-                {"x":0,"y":4,"w":8,"h":4,"i":"6"},
+                {"x":0,"y":0,"w":1,"h":7,"i":"5"},
+                {"x":1,"y":0,"w":1,"h":7,"i":"6"},
             ],
           },
+        
         ]
     
     export default {
