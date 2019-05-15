@@ -1,6 +1,6 @@
 <template>
     <div ref="item"
-         class="vue-grid-item"
+         class="vue-horizontal-item"
          :class="{ 'vue-resizable' : resizableAndNotStatic, 'static': static, 'resizing' : isResizing, 'vue-draggable-dragging' : isDragging, 'cssTransforms' : useCssTransforms, 'render-rtl' : renderRtl, 'disable-userselect': isDragging, 'no-touch': isAndroid }"
          :style="style"
     >
@@ -10,39 +10,39 @@
     </div>
 </template>
 <style>
-    .vue-grid-item {
+    .vue-horizontal-item {
         transition: all 200ms ease;
         transition-property: left, top, right;
         /* add right for rtl */
     }
 
-    .vue-grid-item.no-touch {
+    .vue-horizontal-item.no-touch {
         -ms-touch-action: none;
         touch-action: none;
     }
 
-    .vue-grid-item.cssTransforms {
+    .vue-horizontal-item.cssTransforms {
         transition-property: transform;
         left: 0;
         right: auto;
     }
 
-    .vue-grid-item.cssTransforms.render-rtl {
+    .vue-horizontal-item.cssTransforms.render-rtl {
         left: auto;
         right: 0;
     }
 
-    .vue-grid-item.resizing {
+    .vue-horizontal-item.resizing {
         opacity: 0.6;
         z-index: 3;
     }
 
-    .vue-grid-item.vue-draggable-dragging {
+    .vue-horizontal-item.vue-draggable-dragging {
         transition:none;
         z-index: 3;
     }
 
-    .vue-grid-item.vue-grid-placeholder {
+    .vue-horizontal-item.vue-horizontal-placeholder {
         background: red;
         opacity: 0.2;
         transition-duration: 100ms;
@@ -54,7 +54,7 @@
         user-select: none;
     }
 
-    .vue-grid-item > .vue-resizable-handle {
+    .vue-horizontal-item > .vue-resizable-handle {
         position: absolute;
         width: 20px;
         height: 20px;
@@ -69,7 +69,7 @@
         cursor: se-resize;
     }
 
-    .vue-grid-item > .vue-rtl-resizable-handle {
+    .vue-horizontal-item > .vue-rtl-resizable-handle {
         bottom: 0;
         left: 0;
         background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAuMDAwMDAwMDAwMDAwMDAyIiBoZWlnaHQ9IjEwLjAwMDAwMDAwMDAwMDAwMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDwhLS0gQ3JlYXRlZCB3aXRoIE1ldGhvZCBEcmF3IC0gaHR0cDovL2dpdGh1Yi5jb20vZHVvcGl4ZWwvTWV0aG9kLURyYXcvIC0tPgogPGc+CiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPgogIDxyZWN0IGZpbGw9Im5vbmUiIGlkPSJjYW52YXNfYmFja2dyb3VuZCIgaGVpZ2h0PSIxMiIgd2lkdGg9IjEyIiB5PSItMSIgeD0iLTEiLz4KICA8ZyBkaXNwbGF5PSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgeT0iMCIgeD0iMCIgaGVpZ2h0PSIxMDAlIiB3aWR0aD0iMTAwJSIgaWQ9ImNhbnZhc0dyaWQiPgogICA8cmVjdCBmaWxsPSJ1cmwoI2dyaWRwYXR0ZXJuKSIgc3Ryb2tlLXdpZHRoPSIwIiB5PSIwIiB4PSIwIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIi8+CiAgPC9nPgogPC9nPgogPGc+CiAgPHRpdGxlPkxheWVyIDE8L3RpdGxlPgogIDxsaW5lIGNhbnZhcz0iI2ZmZmZmZiIgY2FudmFzLW9wYWNpdHk9IjEiIHN0cm9rZS1saW5lY2FwPSJ1bmRlZmluZWQiIHN0cm9rZS1saW5lam9pbj0idW5kZWZpbmVkIiBpZD0ic3ZnXzEiIHkyPSItNzAuMTc4NDA3IiB4Mj0iMTI0LjQ2NDE3NSIgeTE9Ii0zOC4zOTI3MzciIHgxPSIxNDQuODIxMjg5IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlPSIjMDAwIiBmaWxsPSJub25lIi8+CiAgPGxpbmUgc3Ryb2tlPSIjNjY2NjY2IiBzdHJva2UtbGluZWNhcD0idW5kZWZpbmVkIiBzdHJva2UtbGluZWpvaW49InVuZGVmaW5lZCIgaWQ9InN2Z181IiB5Mj0iOS4xMDY5NTciIHgyPSIwLjk0NzI0NyIgeTE9Ii0wLjAxODEyOCIgeDE9IjAuOTQ3MjQ3IiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KICA8bGluZSBzdHJva2UtbGluZWNhcD0idW5kZWZpbmVkIiBzdHJva2UtbGluZWpvaW49InVuZGVmaW5lZCIgaWQ9InN2Z183IiB5Mj0iOSIgeDI9IjEwLjA3MzUyOSIgeTE9IjkiIHgxPSItMC42NTU2NCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiM2NjY2NjYiIGZpbGw9Im5vbmUiLz4KIDwvZz4KPC9zdmc+);
@@ -81,7 +81,7 @@
         right: auto;
     }
 
-    .vue-grid-item.disable-userselect {
+    .vue-horizontal-item.disable-userselect {
         user-select: none;
     }
 </style>
@@ -94,7 +94,7 @@
     let interact = require("interactjs");
 
     export default {
-        name: "GridItem",
+        name: "HorizontalItem",
         props: {
             /*cols: {
              type: Number,

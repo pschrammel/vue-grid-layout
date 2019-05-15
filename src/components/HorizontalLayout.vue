@@ -1,17 +1,17 @@
 <template>
-    <div ref="item" class="vue-grid-layout" :style="mergedStyle">
+    <div ref="item" class="vue-horizontal-layout" :style="mergedStyle">
         <slot></slot>
-        <grid-item class="vue-grid-placeholder"
+        <horizontal-item class="vue-horizontal-placeholder"
                    v-show="isDragging"
                    :x="placeholder.x"
                    :y="placeholder.y"
                    :w="placeholder.w"
                    :h="placeholder.h"
-                   :i="placeholder.i"></grid-item>
+                   :i="placeholder.i"></horizontal-item>
     </div>
 </template>
 <style>
-    .vue-grid-layout {
+    .vue-horizontal-layout {
         position: relative;
         transition: height 200ms ease;
     }
@@ -24,18 +24,18 @@
     import {getBreakpointFromWidth, getColsFromBreakpoint, findOrGenerateResponsiveLayout} from "../helpers/responsiveUtils";
     //var eventBus = require('./eventBus');
 
-    import GridItem from './GridItem.vue'
+    import HorizontalItem from './HorizontalItem.vue'
     import {addWindowEventListener, removeWindowEventListener} from "../helpers/DOM";
 
     export default {
-        name: "GridLayout",
+        name: "HorizontalLayout",
         provide() {
             return {
                 eventBus: null
             }
         },
         components: {
-            GridItem,
+            HorizontalItem,
         },
         props: {
             // If true, the container height swells and contracts to fit contents
